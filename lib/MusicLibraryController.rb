@@ -3,10 +3,10 @@ class MusicLibraryController
        mi = MusicImporter.new(path)
        mi.import
     end
- 
+
     def call
        input = ''
- 
+
        until input.casecmp('exit').zero?
           puts 'Welcome to your music library!'
           puts "To list all of your songs, enter 'list songs'."
@@ -17,9 +17,9 @@ class MusicLibraryController
           puts "To play a song, enter 'play song'."
           puts "To quit, type 'exit'."
           puts 'What would you like to do?'
- 
+
           input = gets.chomp
- 
+
           case input.downcase
           when 'list songs'
              list_songs
@@ -36,34 +36,34 @@ class MusicLibraryController
           end
        end
     end
- 
+
     def list_songs
        Song.sort_all_by_name
        Song.all.each_with_index do |song, index|
           puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
        end
     end
- 
+
     def list_artists
        Artist.all.sort_by!(&:name)
        Artist.all.each_with_index do |artist, index|
           puts "#{index + 1}. #{artist.name}"
        end
     end
- 
+
     def list_genres
        Genre.all.sort_by!(&:name)
        Genre.all.each_with_index do |genre, index|
           puts "#{index + 1}. #{genre.name}"
        end
     end
- 
+
     def list_songs_by_artist
        counter = 1
- 
+
        puts 'Please enter the name of an artist:'
        artist = gets.chomp
- 
+
        Song.sort_all_by_name
        Song.all.each do |song|
           if song.artist.name == artist
@@ -72,13 +72,13 @@ class MusicLibraryController
           end
        end
     end
- 
+
     def list_songs_by_genre
        counter = 1
- 
+
        puts 'Please enter the name of a genre:'
        genre = gets.chomp
- 
+
        Song.sort_all_by_name
        Song.all.each do |song|
           if song.genre.name == genre
@@ -87,7 +87,7 @@ class MusicLibraryController
           end
        end
     end
- 
+
     def play_song
        puts 'Which song number would you like to play?'
        Song.sort_all_by_name
